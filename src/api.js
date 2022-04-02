@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const request = require('request');
 const express = require('express');
 const cors = require('cors');
 const serverless = require('serverless-http');
@@ -15,17 +15,19 @@ router.get('/', (req, res) => {
 
 router.post('/request', async (req, res) => {
     const { url , token } = req.body;
-    let data = [];
     try{
-     data = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-    data = await data.json();
-    console.log(data);
-    res.send({data:data , success:true});
+    
+            const options = {
+                    url: url,
+                    method: 'GET',
+                    headers: {
+                    'Authorization': `Bearer ${token}`,
+                    }
+            };
+            request(options, (e , r, body)=>{
+                res.send({data:JSON.parse(body) , success:true});
+            });
+  
     } catch(e) {
         console.log(e);
         res.send({success:false});
