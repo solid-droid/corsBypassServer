@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 
 app.post('/request', async (req, res) => {
     const { url , token } = req.body;
+    console.log(url, token);
     try{
     
             const options = {
