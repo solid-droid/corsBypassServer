@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 process.env.CONTEXT = 'production';
-const port = 9000;
+const port = 8080;
 
 app.get('/', (req, res) => {
     res.send('Cors Bypass Gateway')
