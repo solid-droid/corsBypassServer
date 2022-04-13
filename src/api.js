@@ -1,19 +1,19 @@
 const request = require('request');
 const express = require('express');
 const cors = require('cors');
-const serverless = require('serverless-http');
 
 const app = express();
-const router = express.Router();
-router.use(express.json())
-router.use(express.urlencoded({ extended: false }))
-router.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+process.env.CONTEXT = 'production';
+const port = 9000;
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Cors Bypass Gateway')
   })
 
-router.post('/request', async (req, res) => {
+app.post('/request', async (req, res) => {
     const { url , token } = req.body;
     try{
     
@@ -34,7 +34,9 @@ router.post('/request', async (req, res) => {
     }
    
     
+});
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
 })
   
-app.use('/.netlify/functions/api',router);
-module.exports.handler = serverless(app)

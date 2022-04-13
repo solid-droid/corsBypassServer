@@ -4,12 +4,6 @@
     "cors": "^2.8.5",
     "encoding": "^0.1.13",
     "express": "^4.17.3",
-    "netlify-lambda": "^2.0.15",
-    "request": "^2.81.0",
-    "serverless-http": "^2.7.0"
-  },
-  "scripts": {
-    "start": "netlify-lambda serve src",
-    "build": "netlify-lambda build src"
+    "request": "^2.81.0"
   }
 }
